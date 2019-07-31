@@ -1,4 +1,6 @@
-from utils_CNN_2BLSTM_CTC import *
+""" utils_1 --> rename """
+from utils_CNN_2BLSTM_CTC import * 
+
 from keras.optimizers import Adam
 from keras.callbacks import *
 from sklearn.utils import shuffle

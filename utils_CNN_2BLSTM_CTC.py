@@ -70,14 +70,17 @@ class DataGenerator():
         max_label_length = max(len(m) for m in label_array)
         input_image = np.ones((self.batch_size, IMAGE_HEIGHT, max_image_width, 1))
         
-		""" each input_true_label[ind] should contain the indices of labels/characters in the all_character_list. """
-		input_true_label = np.ones((self.batch_size, max_label_length)) #* NO_CLASSES 
+        """ each input_true_label[ind] should contain the indices of labels/characters in the all_character_list. """
+        input_true_label = np.ones((self.batch_size, max_label_length)) #* NO_CLASSES 
 		
         input_time_step = np.zeros((self.batch_size, 1))
         input_label_length = np.zeros((self.batch_size, 1))
         for ind in range(self.batch_size):  
             real_width = image_array[ind].shape[1]
-            tmp = [self.le.transform([t])[0] for t in label_array[ind]]  """ --> do not need to use "transform"... """
+
+            """ --> do not need to use "transform"... """
+            tmp = [self.le.transform([t])[0] for t in label_array[ind]]  
+
             #print(tmp, ' - ', self.le.inverse_transform(tmp))
             if len(tmp) == 0:
                 print('label: ' + label_array[ind])
@@ -134,15 +137,23 @@ def get_all_character():
     all_character_list = []
     image_list = get_image_list_1()
     for i in image_list:
-        f = open('./label/'+i, encoding="utf8") """could not execute train.py without "label" folder due to this line"""
+
+        """could not execute train.py without "label" folder due to this line"""
+        f = open('./label/'+i, encoding="utf8") 
+
         s = f.read()
         all_character_list += s
     return all_character_list
 
 def create_label_encoder(all_character_list):
     all_character_list = list(set(all_character_list))
-    print(all_character_list, len(all_character_list))  """ please check how many characters in this list? it should be same as number of classes (NO_CLASSES) """
-    le = LabelEncoder() """ do not need to use label encoder for training this network """
+
+    """ please check how many characters in this list? it should be same as number of classes (NO_CLASSES) """
+    print(all_character_list, len(all_character_list))  
+    
+    """ do not need to use label encoder for training this network """
+    le = LabelEncoder() 
+
     le.fit(all_character_list)
     print(le.transform(['n']))
     with open(LABEL_ENCODER_PATH, 'wb') as f:
