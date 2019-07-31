@@ -1,4 +1,4 @@
-from utils_1 import *
+from utils_CNN_2BLSTM_CTC import *
 from keras.optimizers import Adam
 from keras.callbacks import *
 from sklearn.utils import shuffle
