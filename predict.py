@@ -1,5 +1,5 @@
 from keras.models import load_model, Model
-from utils import *
+from utils_CNN_2BLSTM_CTC import *
 import os
 import itertools
 from keras import backend as K
