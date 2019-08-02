@@ -18,7 +18,8 @@ model_new = Model(input_layer, output_layer)
 # print (model_new.summary())
 
 test_image_list = os.listdir(test_folder)
-le = load_label_encoder()
+#le = load_label_encoder()
+le = load_label_index()
 
 for t in test_image_list:
     image = cv2.imread(os.path.join(test_folder, t), 0)    
