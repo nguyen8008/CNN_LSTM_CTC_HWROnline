@@ -34,7 +34,8 @@ class DataGenerator():
         self.batch_size = batch_size
         self.current_train_index = 0
         self.current_val_index = 0
-        self.load_label_encoder()
+        #self.load_label_encoder()
+        self.load_label_index()
 
     def load_image(self, image_path):
         #print(type(image_path))
@@ -51,9 +52,11 @@ class DataGenerator():
         #print(type(s))
         return s
 
-    def load_label_encoder(self):
-        self.le = load_label_encoder()
-
+#    def load_label_encoder(self):
+#        self.le = load_label_encoder()
+    def load_label_index(self):
+        self.le = load_label_index()
+        
     def get_batch(self, partition='train'):
         if partition == 'train':
             temp_image_list = self.train_image_list[self.current_train_index:self.current_train_index+self.batch_size]
@@ -136,21 +139,35 @@ def get_all_character():
         all_character_list += s
     return all_character_list
 
-def create_label_encoder(all_character_list):
+#def create_label_encoder(all_character_list):
+#    all_character_list = list(set(all_character_list))
+#    print(all_character_list, len(all_character_list))
+#    le = LabelEncoder()
+#    le.fit(all_character_list)
+#    print(le.transform(['n']))
+#    with open(LABEL_ENCODER_PATH, 'wb') as f:
+#        pickle.dump(le, f)
+
+def create_label_index(all_character_list):
     all_character_list = list(set(all_character_list))
     print(all_character_list, len(all_character_list))
-    le = LabelEncoder()
-    le.fit(all_character_list)
-    print(le.transform(['n']))
+    #le = LabelEncoder()
+    #le.fit(all_character_list)
+    #data = np.array(['a','b','c','d'])
+    le = pd.Series(all_character_list)
+    print(le)
     with open(LABEL_ENCODER_PATH, 'wb') as f:
         pickle.dump(le, f)
 
+#def load_label_encoder():
+#    with open(LABEL_ENCODER_PATH, 'rb') as f:
+#        le = pickle.load(f)
+#    return le
 
-def load_label_encoder():
+def load_label_index():
     with open(LABEL_ENCODER_PATH, 'rb') as f:
         le = pickle.load(f)
     return le
-
 
 def ctc_loss(args):
     y_pred, y_true, input_length, label_length = args
