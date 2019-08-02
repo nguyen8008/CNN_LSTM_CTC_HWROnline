@@ -5,7 +5,8 @@ from sklearn.utils import shuffle
 
 
 all_character_list = get_all_character()
-create_label_encoder(all_character_list)
+#create_label_encoder(all_character_list)
+create_label_index(all_character_list)
 
 model = create_model()
 MODEL_PATH = 'model/xception_model_{val_loss:.5f}.h5'
