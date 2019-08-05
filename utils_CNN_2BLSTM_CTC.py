@@ -12,6 +12,8 @@ import cv2
 from sklearn.preprocessing import LabelEncoder
 import unicodedata
 from sklearn.utils import shuffle
+import pandas as pd
+import numpy as np
 
 
 IMAGE_HEIGHT = 64
