@@ -58,6 +58,8 @@ class DataGenerator():
 #        self.le = load_label_encoder()
     def load_label_index(self):
         self.le = load_label_index()
+        print("self.le => ", type(self.le), type(self.le[0]), len(self.le))
+        #print(self.le)
         
     def get_batch(self, partition='train'):
         if partition == 'train':
@@ -79,7 +81,14 @@ class DataGenerator():
         input_label_length = np.zeros((self.batch_size, 1))
         for ind in range(self.batch_size):  
             real_width = image_array[ind].shape[1]
-            tmp = [self.le.transform([t])[0] for t in label_array[ind]]
+
+            print("type(label_array[ind])" , type(label_array[ind]))
+            ## label_array[ind] is a string | self.le belongs to pandas series type
+            ## there is no function self.le.transform(), 
+            #     which receives argument of "t" as a character of the string label_array[ind]
+            ## This command should be changed because you changed self.le to pandas.series class
+            tmp = [self.le.transform([t])[0] for t in label_array[ind]] 
+            
             #print(tmp, ' - ', self.le.inverse_transform(tmp))
             if len(tmp) == 0:
                 print('label: ' + label_array[ind])
