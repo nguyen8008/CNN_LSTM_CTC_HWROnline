@@ -1,7 +1,7 @@
 #kiểm tra nhận dạng 
 
 from keras.models import load_model, Model
-from utils_CNN_2BLSTM_CTC_temp_01 import *
+from utils_CNN_2BLSTM_CTC import *
 import os
 import itertools
 from keras import backend as K
