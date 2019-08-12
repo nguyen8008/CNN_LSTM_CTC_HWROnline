@@ -1,3 +1,5 @@
+#tiến hành huấn luyện
+
 from utils_CNN_2BLSTM_CTC import *
 from keras.optimizers import Adam
 from keras.callbacks import *
@@ -33,5 +35,5 @@ step_train = len(data_gen.train_image_list) // BATCH_SIZE // 2
 checkpointer = ModelCheckpoint(
     filepath=MODEL_PATH, save_best_only=True, verbose=1)
 reduce_lr = ReduceLROnPlateau(patience=6, verbose=1, facttor=0.75)
-model.fit_generator(generator=data_gen.next_train(), steps_per_epoch=step_train, epochs=200, verbose=1,
+model.fit_generator(generator=data_gen.next_train(), steps_per_epoch=step_train, epochs=150, verbose=1,
     callbacks=[checkpointer, reduce_lr], validation_data=data_gen.next_val(), validation_steps=step_val)
